@@ -1,0 +1,78 @@
+{
+  "stations" : {
+    "1" : [
+      "AAAA",
+      "BBBB",
+      "CCCC",
+      "DDDD",
+      "EEEE",
+      "FFFF",
+      "GGGG",
+      "HHHH"
+    ],
+    "2" : [
+      "JJJJ",
+      "KKKK",
+      "LLLL",
+      "MMMM",
+      "NNNN",
+      "OOOO"
+    ],
+    "3" : [
+      "PPPP",
+      "RRRR",
+      "QQQQ",
+      "SSSS",
+      "TTTT",
+      "UUUU",
+      "XXXX",
+      "YYYY",
+      "ZZZZ"
+    ]
+  },
+  "connections": [
+    [
+      {
+        "line": 1,
+        "station": "DDDD"
+      },
+      {
+        "line": 2,
+        "station": "JJJJ"
+      }
+    ],
+    [
+      {
+        "line": 2,
+        "station": "OOOO"
+      },
+      {
+        "line": 3,
+        "station": "TTTT"
+      }
+    ]
+  ],
+  "lines" : [
+    {
+      "number" : 1,
+      "name" : "ONE",
+      "color" : "red"
+    },
+    {
+      "number" : 2,
+      "name" : "TWO",
+      "color" : "blue"
+    },
+    {
+      "number" : 3,
+      "name" : "THREE",
+      "color" : "green"
+    }
+  ]
+}
+
+
+
+
+
+
