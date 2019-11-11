@@ -7,28 +7,34 @@
 
         <File name="InfoFile" fileName="logs/logInfo.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
-            <RegexFilter regex="Error:.*" onMatch="DENY" onMismatch="ACCEPT"/>
+            <Filters>
+                <MarkerFilter marker="INPUT_HISTORY_STATIONS"/>
+            </Filters>
+<!--            <RegexFilter regex="Error:.*" onMatch="DENY" onMismatch="ACCEPT"/>-->
         </File>
 
         <File name="DebugFile" fileName="logs/logDebug.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
-            <RegexFilter regex="Search this station:.*|Error:.*" onMatch="DENY" onMismatch="ACCEPT"/>
-
+<!--            <RegexFilter regex="Search this station:.*|Error:.*" onMatch="DENY" onMismatch="ACCEPT"/>-->
+            <Filters>
+                <MarkerFilter marker="WRONG_STATIONS"/>
+            </Filters>
         </File>
+
         <File name="ErrorFile" fileName="logs/logError.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
-            <RegexFilter regex="Search this station:.*|Station not found:.*" onMatch="DENY" onMismatch="ACCEPT"/>
+<!--            <RegexFilter regex="Search this station:.*|Station not found:.*" onMatch="DENY" onMismatch="ACCEPT"/>-->
+<!--            <Filters>-->
+<!--                <MarkerFilter marker="ERRORS_MARKER"/>-->
+<!--            </Filters>-->
         </File>
-
     </appenders>
 
     <loggers>
-
         <root level="trace">
-            <appender-ref ref="InfoFile" level="info"/>
-            <appender-ref ref="DebugFile" level="debug"/>
-            <appender-ref ref="ErrorFile" level="errors"/>
-
+            <appender-ref ref="InfoFile"/>
+            <appender-ref ref="DebugFile"/>
+            <appender-ref ref="ErrorFile"/>
         </root>
     </loggers>
 </configuration>

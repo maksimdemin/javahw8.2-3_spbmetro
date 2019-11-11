@@ -2,6 +2,8 @@ import core.Line;
 import core.Station;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,16 +17,20 @@ import java.util.Scanner;
 public class Main
 {
     private static Logger logger;
+    private static final Logger LOGGER = LogManager.getLogger(Main.class); // лолггер для вариатна с маркерами
+    private static final Marker INPUT_STATIONS_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY_STATIONS"); // маркер для лога (какие станции ищут)
+    private static final Marker WRONG_STATIONS_MARKER =  MarkerManager.getMarker("WRONG_STATIONS"); // маркер для лога (неверно введенные станции)
+    private static final Marker ERRORS_MARKER = MarkerManager.getMarker("ERRORS_MARKER"); // маркер для лога ошибок
+
 
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
-
     private static StationIndex stationIndex;
 
     public static void main(String[] args)
     {
         RouteCalculator calculator = getRouteCalculator();
-        logger = LogManager.getRootLogger();
+//        logger = LogManager.getRootLogger(); // вариант с фильтрами
 
         System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
         scanner = new Scanner(System.in);
@@ -36,7 +42,7 @@ public class Main
 
                 List<Station> route = calculator.getShortestRoute(from, to);
                 if (route.size() > 6) {
-                    throw new ArrayIndexOutOfBoundsException("Out of range route!");
+                    throw new ArrayIndexOutOfBoundsException("Out of bounds size route");
                 }
                 System.out.println("Маршрут:");
                 printRoute(route);
@@ -44,7 +50,8 @@ public class Main
                 System.out.println("Длительность: " +
                         RouteCalculator.calculateDuration(route) + " минут");
             } catch (Exception ex) {
-                logger.error("Error: " + ex.getMessage());
+//                logger.error("Error: " + ex);
+                LOGGER.error(ERRORS_MARKER, "Error: ", ex);
                 ex.printStackTrace();
             }
         }
@@ -83,14 +90,18 @@ public class Main
             System.out.println(message);
             String line = scanner.nextLine().trim();
             if (line.length() > 9) {
-                throw new ArrayIndexOutOfBoundsException("Out of range length of name!");
+                throw new ArrayIndexOutOfBoundsException("Out of bounds length of name station");
             }
             Station station = stationIndex.getStation(line);
             if(station != null) {
-                logger.info("Search this station: " + line);
+//                logger.info("Search this station: " + line); // вариант разделения информации по логам фильтрами
+                LOGGER.info(INPUT_STATIONS_HISTORY_MARKER,"User search station: {}", line); // вариант разделения информации по логам маркерами
+                LOGGER.warn("!!!!");
+
                 return station;
             }
-            logger.debug("Station not found: " + line);
+//            logger.debug("Station not found: " + line); // вариант разделения информации по логам фильтрами
+            LOGGER.debug(WRONG_STATIONS_MARKER, "Station entered incorrectly: {}" , line); // вариант разделения информации по логам маркерами
             System.out.println("Станция не найдена :(");
         }
     }
