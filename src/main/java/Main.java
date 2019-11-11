@@ -96,8 +96,6 @@ public class Main
             if(station != null) {
 //                logger.info("Search this station: " + line); // вариант разделения информации по логам фильтрами
                 LOGGER.info(INPUT_STATIONS_HISTORY_MARKER,"User search station: {}", line); // вариант разделения информации по логам маркерами
-                LOGGER.warn("!!!!");
-
                 return station;
             }
 //            logger.debug("Station not found: " + line); // вариант разделения информации по логам фильтрами
