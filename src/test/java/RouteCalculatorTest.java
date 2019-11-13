@@ -32,8 +32,8 @@ public class RouteCalculatorTest extends TestCase
          ⟰                                                 ⟰
          ⟱                                                 ⟱
         CCCC                                               SSSS
-         ⟰                                                 ⟰
-         ⟱                                                 ⟱
+         ⟰                       (2)                       ⟰
+         ⟱                      (TWO)                      ⟱
      DDDD/JJJJ ⤆⤇ КККК ⤆⤇ LLLL ⤆⤇ MMMM ⤆⤇ NNNN ⤆⤇ OOOO/TTTT
          ⟰                                                 ⟰
          ⟱                                                 ⟱
@@ -159,7 +159,6 @@ public class RouteCalculatorTest extends TestCase
 
     public void testCalculatorRouteMetroBetweenSameStation()
     {
-
         routeBetweenSameStation = new ArrayList<>();
         routeBetweenSameStation.add(stationIndex.getStation("BBBB"));
 
@@ -184,7 +183,6 @@ public class RouteCalculatorTest extends TestCase
           List<Station> actual = routeCalculator.getShortestRoute(stationIndex.getStation("AAAA"), stationIndex.getStation("EEEE"));
 
         assertEquals(routeMetroStationsOnSameLine, actual);
-
 
         System.out.println(routeMetroStationsOnSameLine);
         System.out.println(actual);
@@ -225,7 +223,6 @@ public class RouteCalculatorTest extends TestCase
         routeTwoTransferMetroStations.add(stationIndex.getStation("TTTT"));
         routeTwoTransferMetroStations.add(stationIndex.getStation("UUUU"));
         routeTwoTransferMetroStations.add(stationIndex.getStation("XXXX"));
-
 
         List<Station> actual = routeCalculator.getShortestRoute(stationIndex.getStation("BBBB"), stationIndex.getStation("XXXX"));
 
