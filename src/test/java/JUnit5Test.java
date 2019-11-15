@@ -1,13 +1,19 @@
 import core.Line;
 import core.Station;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeSet;
 
 import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
 
-public class RouteCalculatorTestNew extends TestCase
-{
+@DisplayName("RouteCalculator Tests")
+class JUnit5Test {
     List<Station> route;
     List<Station> routeMetroStationsOnSameLine;
     List<Station> routeOneTransferMetroStations;
@@ -16,8 +22,9 @@ public class RouteCalculatorTestNew extends TestCase
     StationIndex stationIndex;
     RouteCalculator routeCalculator;
 
-    @Override
-    public void setUp() throws Exception
+
+    @BeforeEach
+    void setUp() throws Exception
     {
         /*
         Схема мини метро
@@ -57,8 +64,8 @@ public class RouteCalculatorTestNew extends TestCase
         TreeSet<Station> stations = new TreeSet<>();
 
         String[] names = {"AAAA", "BBBB", "CCCC", "DDDD", "EEEE", "FFFF",
-        "JJJJ", "KKKK", "LLLL", "MMMM", "NNNN", "OOOO",
-        "PPPP", "RRRR", "QQQQ", "SSSS", "TTTT", "UUUU", "XXXX"};
+                "JJJJ", "KKKK", "LLLL", "MMMM", "NNNN", "OOOO",
+                "PPPP", "RRRR", "QQQQ", "SSSS", "TTTT", "UUUU", "XXXX"};
 
         for (int i = 0; i < names.length; i++) {
             if (i < 6) {
@@ -107,16 +114,22 @@ public class RouteCalculatorTestNew extends TestCase
         route.add(stationIndex.getStation("UUUU"));
     }
 
-    public void testCalculateDuration()
+    @Test
+    @DisplayName("Route duration test")
+    void firstTest()
     {
+        System.out.println("First test method is OK");
         double actual = RouteCalculator.calculateDuration(route);
         double expected = 24.5;
         assertReflectionEquals(expected, actual);
     }
 
 
-    public void testCalculatorRouteMetroStationsOnSameLine()
+    @Test
+    @DisplayName("Stations on same line test route")
+    void twoTest()
     {
+        System.out.println("Second test method is OK");
         routeMetroStationsOnSameLine = new ArrayList<>();
         routeMetroStationsOnSameLine.add(stationIndex.getStation("AAAA"));
         routeMetroStationsOnSameLine.add(stationIndex.getStation("BBBB"));
@@ -130,8 +143,11 @@ public class RouteCalculatorTestNew extends TestCase
     }
 
 
-    public void testCalculatorRouteOneTransferMetroStations()
+    @Test
+    @DisplayName("One Connection test route")
+    void threeTest()
     {
+        System.out.println("Third test method is OK");
         routeOneTransferMetroStations = new ArrayList<>();
         routeOneTransferMetroStations.add(stationIndex.getStation("FFFF"));
         routeOneTransferMetroStations.add(stationIndex.getStation("EEEE"));
@@ -147,8 +163,11 @@ public class RouteCalculatorTestNew extends TestCase
     }
 
 
-    public void testCalculatorRouteTwoTransferMetroStations()
+    @Test
+    @DisplayName("Two Connection test route")
+    void fourTest()
     {
+        System.out.println("Fourth test method is OK");
         routeTwoTransferMetroStations = new ArrayList<>();
         routeTwoTransferMetroStations.add(stationIndex.getStation("BBBB"));
         routeTwoTransferMetroStations.add(stationIndex.getStation("CCCC"));
